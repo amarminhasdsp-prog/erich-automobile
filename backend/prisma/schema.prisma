@@ -13,8 +13,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 // Admin-Benutzer fuer das Backoffice (/admin im Frontend, /api/admin/* im

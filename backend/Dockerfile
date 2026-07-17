@@ -16,4 +16,4 @@ EXPOSE 4000
 # Beim Container-Start: Migrationen anwenden, danach Server starten.
 # Fuer die allererste Inbetriebnahme kann optional "npm run seed" angehaengt werden,
 # um Dummy-Daten zu erzeugen (siehe README).
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
+CMD ["sh", "-c", "npx prisma db push && node dist/server.js"]
