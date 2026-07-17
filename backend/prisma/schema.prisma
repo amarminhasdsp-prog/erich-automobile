@@ -1,0 +1,128 @@
+// Datenmodell fuer das Autohaendler-Portal
+// Orientiert an mobile.de: Fahrzeuge mit technischen Daten, Fotos, Dokumenten
+//
+// Hinweis: Die Werte FuelType, TransmissionType, VehicleCategory,
+// ConditionType, VehicleStatus und DocumentType werden bewusst weiterhin als
+// String gespeichert und in der Anwendungsschicht per Zod validiert (siehe
+// src/utils/validation.ts) statt als native PostgreSQL-Enums. Das haelt das
+// Schema kompatibel mit der bisherigen SQLite-Historie und vermeidet
+// Enum-Migrationen bei kuenftigen Wertaenderungen.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Admin-Benutzer fuer das Backoffice (/admin im Frontend, /api/admin/* im
+// Backend). Ersetzt das frueher genutzte einzelne Master-Passwort.
+// role wird als String gespeichert; gueltige Werte: "ADMIN" | "EDITOR"
+// (siehe src/utils/validation.ts, adminRoleEnum).
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("EDITOR")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Dealer {
+  id          String    @id @default(uuid())
+  companyName String
+  street      String
+  postalCode  String
+  city        String
+  country     String    @default("Deutschland")
+  phone       String
+  email       String    @unique
+  website     String?
+  createdAt   DateTime  @default(now())
+  vehicles    Vehicle[]
+}
+
+model Vehicle {
+  id                String            @id @default(uuid())
+  dealerId          String
+  dealer            Dealer            @relation(fields: [dealerId], references: [id])
+
+  // Grunddaten
+  make              String            // Marke, z.B. "Volkswagen"
+  model             String            // Modell, z.B. "Golf"
+  variant           String?           // Ausstattungslinie, z.B. "GTI"
+  category          String            // VehicleCategory (siehe validation.ts)
+  condition         String            // ConditionType (siehe validation.ts)
+  status            String            @default("VERFUEGBAR") // VehicleStatus
+
+  // Preis
+  price             Int               // in Cent (EUR)
+  vatDeductible      Boolean           @default(false) // Mehrwertsteuer ausweisbar
+
+  // Technische Daten
+  firstRegistration DateTime          // Erstzulassung
+  mileageKm         Int
+  powerKw           Int
+  powerHp           Int
+  fuelType          String            // FuelType (siehe validation.ts)
+  transmission      String            // TransmissionType (siehe validation.ts)
+  cubicCapacity     Int?              // Hubraum in ccm
+  cylinders         Int?
+  fuelConsumption   Float?            // l/100km oder kWh/100km
+  co2Emissions      Int?              // g/km
+  emissionClass     String?           // z.B. "Euro 6"
+  numberOfDoors     Int?
+  numberOfSeats     Int?
+  previousOwners    Int?
+
+  // Optik
+  exteriorColor     String?
+  interiorColor     String?
+  interiorMaterial  String?
+
+  // Ausstattung (als kommagetrennte Liste, einfach fuer SQLite ohne Zusatztabelle)
+  features          String?           // z.B. "Klimaautomatik,Navigationssystem,Sitzheizung"
+
+  // Beschreibung
+  title             String            // Anzeige-Titel
+  description       String            // Freitext-Beschreibung
+
+  // Standort
+  locationCity      String?
+  locationPostalCode String?
+
+  vin               String?           // Fahrgestellnummer
+
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  photos            Photo[]
+  documents         Document[]
+
+  @@index([make, model])
+  @@index([status])
+}
+
+model Photo {
+  id         String   @id @default(uuid())
+  vehicleId  String
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  filename   String   // Dateiname im Uploads-Ordner
+  originalName String
+  isMain     Boolean  @default(false)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model Document {
+  id           String       @id @default(uuid())
+  vehicleId    String
+  vehicle      Vehicle      @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  filename     String
+  originalName String
+  type         String       // DocumentType (siehe validation.ts)
+  createdAt    DateTime     @default(now())
+}
