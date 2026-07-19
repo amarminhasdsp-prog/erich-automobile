@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vehicleFeed dealerId="DEALER-12345" generatedAt="2026-07-19T08:00:00Z">
+  <vehicle>
+    <externalId>ML-987654321</externalId>
+    <status>ACTIVE</status>
+    <make>Volkswagen</make>
+    <model>Golf</model>
+    <variant>GTI</variant>
+    <category>SEDAN</category>
+    <condition>USED</condition>
+    <price currency="EUR" vatDeductible="true">24990.00</price>
+    <firstRegistration>2021-03-01</firstRegistration>
+    <mileage unit="km">32000</mileage>
+    <power kw="180" hp="245"/>
+    <fuelType>PETROL</fuelType>
+    <transmission>MANUAL</transmission>
+    <cubicCapacity>1984</cubicCapacity>
+    <cylinders>4</cylinders>
+    <fuelConsumptionCombined>7.2</fuelConsumptionCombined>
+    <co2Emission>164</co2Emission>
+    <emissionClass>Euro 6</emissionClass>
+    <numberOfDoors>5</numberOfDoors>
+    <numberOfSeats>5</numberOfSeats>
+    <previousOwners>1</previousOwners>
+    <exteriorColor>Schwarz Metallic</exteriorColor>
+    <interiorColor>Schwarz</interiorColor>
+    <interiorMaterial>Stoff/Leder</interiorMaterial>
+    <features>
+      <feature>Klimaautomatik</feature>
+      <feature>Navigationssystem</feature>
+      <feature>Sitzheizung</feature>
+    </features>
+    <title>VW Golf GTI 2.0 TSI DSG</title>
+    <description>Gepflegter Golf GTI aus erster Hand, scheckheftgepflegt.</description>
+    <location city="Stuttgart" postalCode="70173"/>
+    <vin>WVWZZZ1KZAW123456</vin>
+    <images>
+      <image sortOrder="0" isMain="true">https://media.example-feed.de/v/987654321/1.jpg</image>
+      <image sortOrder="1" isMain="false">https://media.example-feed.de/v/987654321/2.jpg</image>
+    </images>
+  </vehicle>
+  <vehicle>
+    <externalId>ML-111222333</externalId>
+    <status>ACTIVE</status>
+    <make>BMW</make>
+    <model>3er</model>
+    <variant>320d Touring</variant>
+    <category>ESTATE</category>
+    <condition>ANNUAL</condition>
+    <price currency="EUR" vatDeductible="false">32500.00</price>
+    <firstRegistration>2022-06</firstRegistration>
+    <mileage unit="km">18500</mileage>
+    <power kw="140" hp="190"/>
+    <fuelType>DIESEL</fuelType>
+    <transmission>AUTOMATIC</transmission>
+    <cubicCapacity>1995</cubicCapacity>
+    <cylinders>4</cylinders>
+    <fuelConsumptionCombined>5.1</fuelConsumptionCombined>
+    <co2Emission>134</co2Emission>
+    <emissionClass>Euro 6</emissionClass>
+    <numberOfDoors>5</numberOfDoors>
+    <numberOfSeats>5</numberOfSeats>
+    <previousOwners>1</previousOwners>
+    <exteriorColor>Alpinweiss</exteriorColor>
+    <interiorColor>Beige</interiorColor>
+    <interiorMaterial>Leder</interiorMaterial>
+    <features>
+      <feature>Navigationssystem</feature>
+      <feature>Panoramadach</feature>
+    </features>
+    <title>BMW 320d Touring Aut.</title>
+    <description>Jahreswagen, top Zustand.</description>
+    <location city="Stuttgart" postalCode="70567"/>
+    <vin>WBA3B1C50EK123456</vin>
+    <images>
+      <image sortOrder="0" isMain="true">https://media.example-feed.de/v/111222333/1.jpg</image>
+    </images>
+  </vehicle>
+  <vehicle>
+    <externalId>ML-444555666</externalId>
+    <status>ACTIVE</status>
+    <make>Skoda</make>
+    <model>Octavia</model>
+    <category>KOMBI</category>
+    <condition>GEBRAUCHT</condition>
+    <price currency="EUR" vatDeductible="true">18990.00</price>
+    <firstRegistration>2019-11-01</firstRegistration>
+    <mileage unit="km">65000</mileage>
+    <power kw="110" hp="150"/>
+    <fuelType>BENZIN</fuelType>
+    <transmission>MANUELL</transmission>
+    <previousOwners>2</previousOwners>
+    <exteriorColor>Grau Metallic</exteriorColor>
+    <features>
+      <feature>Sitzheizung</feature>
+    </features>
+    <title>Skoda Octavia Combi 1.5 TSI</title>
+    <description>Solider Gebrauchtwagen mit gepflegter Historie.</description>
+    <location city="Stuttgart" postalCode="70567"/>
+    <images>
+    </images>
+  </vehicle>
+</vehicleFeed>
